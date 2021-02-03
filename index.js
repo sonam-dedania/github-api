@@ -1,24 +1,27 @@
-// var selectedIndex = 0;
+let selectedIndex = 0;
+let data = [];
 
 function ajaxTest() {
     $.ajax({
         url: "https://api.github.com/users", success: function (result) {
             console.log(result);
             displayUsers(result);
+            data = result;
             // $("#div1").html(JSON.stringify(result));
         }
     });
 }
 
-function getData(followUrl, followingUrl) {
-    getFollowers(followUrl);
-    getFollowing(followingUrl.substr(0, (followingUrl.length - 13)));
+function getData(i) {
+    selectedIndex = i;
+    getFollowers();
+    //  getFollowing();
 
 }
 
-function getFollowers(followUrl) {
+function getFollowers() {
     $.ajax({
-        url: followUrl,
+        url: data[selectedIndex].followers_url,
         success: function (result) {
             displayFollowers(result);
             // $("#div1").html(JSON.stringify(result));
@@ -27,9 +30,10 @@ function getFollowers(followUrl) {
     });
 }
 
-function getFollowing(followingUrl) {
+function getFollowing() {
+    let followingUrl = data[selectedIndex].following_url;
     $.ajax({
-        url: followingUrl,
+        url: followingUrl.substr(0, (followingUrl.length - 13)),
         success: function (result) {
             displayFollowing(result);
         }
@@ -75,7 +79,7 @@ function displayUsers(result) {
 
     for (let i = 0; i < result.length; i++) {
 
-        userInfo += '<div class="list" onClick="getData(\'' + result[i].followers_url + '\',\'' + result[i].following_url + '\')" >';
+        userInfo += '<div class="list" onClick="getData(' + i + ')" >';
         userInfo += '<img src="' + result[i].avatar_url + '" alt="" />';
         userInfo += '        ' + result[i].login + '';
         userInfo += '</div>';
