@@ -14,8 +14,13 @@ function ajaxTest() {
 
 function getData(i) {
     selectedIndex = i;
-    getFollowers();
-    //  getFollowing();
+
+    if ($("ul#sampleTabs li.active").text().trim() == "Followers") {
+        getFollowers();
+    }
+    else {
+        getFollowing();
+    }
 
 }
 
@@ -78,10 +83,11 @@ function displayUsers(result) {
     let userInfo = "";
 
     for (let i = 0; i < result.length; i++) {
-
+        userInfo += '<div class="user-box">';
         userInfo += '<div class="list" onClick="getData(' + i + ')" >';
         userInfo += '<img src="' + result[i].avatar_url + '" alt="" />';
-        userInfo += '        ' + result[i].login + '';
+        userInfo += '<p>' + result[i].login + '</p>';
+        userInfo += '</div>';
         userInfo += '</div>';
     }
     $('.listcontainer').html(userInfo);
