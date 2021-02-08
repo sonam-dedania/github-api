@@ -50,11 +50,13 @@ function displayFollowers(result) {
     let userFollowers = "";
 
     for (let j = 0; j < result.length; j++) {
-
+        userFollowers += '<div class="follower-box">';
         userFollowers += '<div class="list">';
         userFollowers += '<img src="' + result[j].avatar_url + '" alt="" />';
-        userFollowers += '        ' + result[j].login + '';
+        userFollowers += '' + result[j].login + '';
         userFollowers += '</div>';
+        userFollowers += '</div>';
+        userFollowers += '<br/>';
     }
     $('.followers-container').html(userFollowers);
 }
@@ -69,10 +71,13 @@ function displayFollowing(result) {
 
     for (let j = 0; j < result.length; j++) {
 
+        userFollowing += '<div class="follower-box">';
         userFollowing += '<div class="list">';
         userFollowing += '<img src="' + result[j].avatar_url + '" alt="" />';
-        userFollowing += '        ' + result[j].login + '';
+        userFollowing += '' + result[j].login + '';
         userFollowing += '</div>';
+        userFollowing += '</div>';
+        userFollowing += '<br/>';
     }
     $('.following-container').html(userFollowing);
 }
